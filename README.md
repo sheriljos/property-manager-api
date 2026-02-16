@@ -7,7 +7,7 @@ Analyze Funda real estate listings and rank top makelaars (real estate agents) i
 
 ---
 
-## 📋 Assignment Overview
+## 📋 Overview
 
 **Objective:** Determine which makelaars in Amsterdam have the most properties listed for sale.
 
@@ -32,17 +32,6 @@ This solution implements **Hexagonal Architecture** (Ports & Adapters):
 - ✅ **Dependency inversion** - Ports & adapters pattern
 - ✅ **Single responsibility** - Each layer has one reason to change
 - ✅ **Testability** - Interfaces and dependency injection throughout
-
----
-
-## 🚀 Technologies & Packages
-
-- **.NET 8** - Latest LTS framework
-- **ASP.NET Core** - REST API
-- **Polly** - Resilience policies (retry with exponential backoff, timeout)
-- **xUnit** - Unit testing framework
-- **FluentAssertions** - Fluent test assertions
-- **Swagger/OpenAPI** - API documentation
 
 ---
 
@@ -170,16 +159,6 @@ GET /makelaars?city=rotterdam&filters=tuin&filters=woonhuis&top=5
 ---
 
 ## 🛡️ Error Handling & Resilience
-
-### Two-Tier Strategy
-
-#### 1. Proactive Mitigation (Avoid Errors)
-- **100ms delay** between consecutive API requests
-- Achieves ~92 requests/minute (safely under 100/min limit)
-- **Large page size** (250 items) to minimize total requests
-- Amsterdam query: ~16 requests total (~8 seconds)
-
-#### 2. Reactive Handling (Handle Errors)
 
 **Polly Resilience Policies:**
 
