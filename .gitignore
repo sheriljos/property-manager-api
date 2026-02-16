@@ -75,3 +75,6 @@ Desktop.ini
 # Logs
 logs/
 *.log
+
+# appsettings
+appsettings.*.json

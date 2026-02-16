@@ -3,7 +3,7 @@
 [![.NET](https://img.shields.io/badge/.NET-8.0-512BD4)](https://dotnet.microsoft.com/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Analyze Funda real estate listings and rank top makelaars (real estate agents) in Amsterdam by property count.
+Analyze Funda real estate listings and rank top makelaars (real estate agents) in the chosen city.
 
 ---
 
@@ -64,35 +64,19 @@ This solution implements **Hexagonal Architecture** (Ports & Adapters):
 ### Prerequisites
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 
-### Installation & Run
+### 🏃‍♀️Run application locally
+
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/funda-makelaar-analytics.git
-cd funda-makelaar-analytics
+git clone https://github.com/sheriljos/property-manager-api
+cd property-manager-api
 
 # Restore dependencies
 dotnet restore
 
 # Run API
-dotnet run --project PropertyManager.Api
-
-# API will be available at:
-# - HTTP: http://localhost:5000
-# - Swagger UI: http://localhost:5000/swagger
+dotnet run --project src/PropertyManager.Api
 ```
-
-### Run Tests
-```bash
-# Run all tests
-dotnet test
-
-# Run with detailed output
-dotnet test --logger "console;verbosity=detailed"
-
-# Run with coverage (requires coverlet)
-dotnet test /p:CollectCoverage=true
-```
-
 ---
 
 ## 📡 API Documentation
@@ -103,12 +87,12 @@ dotnet test /p:CollectCoverage=true
 
 **Query Parameters:**
 
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `city` | string | ✅ Yes | - | City name (e.g., "amsterdam") |
-| `filters` | string[] | No | `[]` | Additional filters (e.g., "tuin", "woonhuis") |
-| `type` | enum | No | `Koop` | Property type: `Koop` (purchase) or `Huur` (rent) |
-| `top` | integer | No | `10` | Number of results (1-100) |
+| Parameter | Type | Required | Default | Description                                       |
+|-----------|------|----------|---------|---------------------------------------------------|
+| `city` | string | ✅ Yes | -       | City name (e.g., "amsterdam")                     |
+| `filters` | string[] | No | `[]`    | Additional filters (e.g., "tuin", "woonhuis")     |
+| `type` | enum | No | `koop`  | Property type: `koop` (purchase) or `huur` (rent) |
+| `top` | integer | No | `10`    | Number of results (1-100)                         |
 
 ### Examples
 
@@ -133,17 +117,17 @@ GET /makelaars?city=rotterdam&filters=tuin&filters=woonhuis&top=5
   {
     "id": 123,
     "name": "ABC Makelaars",
-    "NumberOfProperties": 150
+    "NumberOfProperties": 9
   },
   {
     "id": 456,
     "name": "XYZ Real Estate",
-    "NumberOfProperties": 120
+    "NumberOfProperties": 7
   },
   {
     "id": 789,
     "name": "Best Homes",
-    "NumberOfProperties": 95
+    "NumberOfProperties": 6
   }
 ]
 ```
@@ -218,29 +202,10 @@ Request → Success ✅
 - ✅ Ordering (descending by count)
 - ✅ Grouping by makelaar ID (not name)
 
-
-## 🔑 Key Implementation Decisions
-
-### 1. Why Hexagonal Architecture?
-- **Separation of concerns:** Business logic independent of infrastructure
-- **Testability:** Core domain can be tested without HTTP/database dependencies
-- **Flexibility:** Easy to swap Funda API for different provider
-- **Industry standard:** Commonly used in enterprise applications
-
-### 2. Why Polly for Resilience?
-- **Industry standard:** Microsoft-recommended for .NET resilience
-- **Declarative:** Policies configured at startup, not scattered in code
-- **Separation:** Resilience logic separated from business logic
-- **Comprehensive:** Handles retries, timeouts, circuit breakers
-
-### 3. Why Fixed Delay for Rate Limits?
-Rate limits reset every 60 seconds. Exponential backoff (1s, 2s, 4s) would waste retry attempts on delays shorter than the reset period.
-
----
-
 ## 🤖 AI Usage Disclosure
-
-As requested in the assignment guidelines, transparency on AI tool usage:
+For transparency on AI tool usage:
+- ✅ Code generation (e.g., Resilience policies)
+- ✅ Documentation writing (README structure, API docs)
 
 ### Used AI For:
 - ✅ Polly policy pattern validation
@@ -256,7 +221,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👤 Author
 
 **Your Name**
-- GitHub: [@sheriljose](https://github.com/sheriljos)
+- GitHub: [@sheriljos](https://github.com/sheriljos)
 - LinkedIn: [Sheril Jose](https://www.linkedin.com/in/sheriljose/)
 
 ---
@@ -264,7 +229,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - **Funda** for providing the Partner API
-- **Assignment reviewers** for the opportunity
 - **.NET Community** for excellent documentation and libraries
 
 ---
